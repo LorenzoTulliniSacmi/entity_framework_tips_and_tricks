@@ -1,0 +1,40 @@
+# .NET build artifacts
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.dll
+*.exe
+*.pdb
+
+# EF Core
+Migrations/
+*.db
+*.db-shm
+*.db-wal
+
+# Visual Studio
+.vs/
+*.csproj.user
+
+# Rider
+.idea/
+
+# VS Code
+.vscode/
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+~$*
+
+# Docker volumes
+postgres_data/

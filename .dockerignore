@@ -1,0 +1,26 @@
+# Git
+.git
+.gitignore
+
+# Build artifacts
+**/bin
+**/obj
+**/*.user
+**/*.suo
+
+# IDE
+.vs/
+.vscode/
+.idea/
+
+# Databases
+**/*.db
+**/*.db-shm
+**/*.db-wal
+
+# Documentation
+*.md
+*.pptx
+
+# Migrations
+**/Migrations/
