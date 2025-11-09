@@ -37,13 +37,13 @@ Dalla root del progetto:
 
 ```bash
 # Avvia PostgreSQL
-docker-compose up -d
+docker compose up -d
 
 # Verifica che sia in esecuzione
 docker ps
 
 # Ferma PostgreSQL quando hai finito
-docker-compose down
+docker compose down
 ```
 
 Il container PostgreSQL sarà disponibile su:
@@ -71,11 +71,9 @@ optionsBuilder.UseSqlite("Data Source=app.db");
 
 ## Come Iniziare
 
-1. **Avvia PostgreSQL** con `docker-compose up -d` (oppure configura SQLite)
-2. Apri il progetto dell'esercizio che vuoi svolgere
-3. Leggi il README.md nella cartella del progetto
-4. Completa i task richiesti
-5. Confronta la tua soluzione con quella nella cartella `Solutions/`
+1. Avvia PostgreSQL con `docker compose up -d` (oppure configura SQLite)
+2. Naviga all'esercizio desiderato
+3. Completa i task richiesti
 
 ## Prerequisiti
 
@@ -102,14 +100,6 @@ dotnet ef database update
 # Rimuovere l'ultima migration
 dotnet ef migrations remove
 ```
-
-## Suggerimenti
-
-- Leggi sempre il README prima di iniziare
-- Testa il codice eseguendo `dotnet run`
-- Se ti blocchi, consulta la soluzione corrispondente in `Solutions/`
-- Sperimenta modificando il codice e osservando i risultati
-- Usa il logging delle query per capire cosa fa Entity Framework
 
 ## Risorse
 

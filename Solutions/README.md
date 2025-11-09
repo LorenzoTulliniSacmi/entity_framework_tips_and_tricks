@@ -8,7 +8,7 @@ Le soluzioni usano PostgreSQL tramite Docker. **Prima di eseguire qualsiasi solu
 
 ```bash
 # Dalla root del progetto
-docker-compose up -d
+docker compose up -d
 
 # Verifica che PostgreSQL sia in esecuzione
 docker ps
@@ -41,7 +41,7 @@ optionsBuilder.UseSqlite("Data Source=app.db");
 
 Quando hai finito:
 ```bash
-docker-compose down
+docker compose down
 ```
 
 ## Esercizi Risolti
@@ -85,28 +85,15 @@ docker-compose down
 
 ## Come Usare le Soluzioni
 
-### 1. Dopo aver completato l'esercizio
 ```bash
 # Esegui la tua soluzione
 cd Exercises/Exercise01_Setup
 dotnet run
 
-# Confronta con la soluzione
+# Confronta con la soluzione di riferimento
 cd ../../Solutions/Exercise01_Setup
 dotnet run
 ```
-
-### 2. Se sei bloccato
-1. Rileggi la consegna nell'esercizio
-2. Prova a cercare online o nella documentazione
-3. Guarda solo la parte specifica della soluzione che ti serve
-4. Torna al tuo codice e prova a implementare
-
-### 3. Studio delle best practices
-- Leggi i commenti nel codice
-- Nota i pattern utilizzati (✅ vs ❌)
-- Esegui le soluzioni e osserva l'output
-- Sperimenta modificando il codice
 
 ## Eseguire le Soluzioni
 
@@ -148,13 +135,6 @@ dotnet ef database update
 | Best Practices | Da implementare | Già applicate |
 | Output | Da generare | Esempi funzionanti |
 
-## Suggerimenti per lo Studio
-
-1. **Non copiare**: Prova prima da solo
-2. **Sperimenta**: Modifica le soluzioni per capire meglio
-3. **Confronta**: Nota le differenze tra il tuo approccio e la soluzione
-4. **Pratica**: Ripeti gli esercizi per memorizzare i pattern
-
 ## Best Practices Evidenziate
 
 - ✅ `SaveChanges()` fuori dai loop
@@ -165,12 +145,3 @@ dotnet ef database update
 - ✅ Configurazione Fluent API separata dalle entità
 - ✅ Navigation properties per relazioni
 
-## Prossimi Passi
-
-Dopo aver completato tutti gli esercizi:
-1. Rileggi la dispensa per consolidare i concetti
-2. Prova a creare un progetto personale con EF Core
-3. Applica questi pattern nei tuoi progetti reali
-4. Esplora funzionalità avanzate di EF Core
-
-Buono studio! 🚀
