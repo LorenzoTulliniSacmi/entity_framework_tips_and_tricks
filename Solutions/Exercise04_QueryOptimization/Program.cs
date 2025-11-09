@@ -4,20 +4,14 @@ using Exercise04_QueryOptimization.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
-var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
-
-// Configurazione PostgreSQL (richiede Docker - vedi README)
-optionsBuilder.UseNpgsql("Host=localhost;Database=ef_lab_orders;Username=efuser;Password=efpass");
-
-// Alternativa SQLite (se non hai Docker, commenta PostgreSQL e decommenta questa riga)
-// optionsBuilder.UseSqlite("Data Source=orders.db");
-
+// Configurazione DbContext (gestita in AppDbContext.OnConfiguring)
 // Prepara database con dati di test
 Console.WriteLine("Preparazione database...");
-using (var setupContext = new AppDbContext(optionsBuilder.Options))
+using (var setupContext = new AppDbContext())
 {
     setupContext.Database.EnsureDeleted();
-    setupContext.Database.EnsureCreated();
+    // Applica automaticamente le migrations al database
+    setupContext.Database.Migrate();
 
     // Crea 100 clienti
     var customers = new List<Customer>();
@@ -55,7 +49,7 @@ Console.WriteLine("=== DIMOSTRAZIONE PROBLEMA N+1 ===\n");
 Console.WriteLine("1️⃣  VERSIONE CATTIVA (N+1 Problem)");
 Console.WriteLine("=".Repeat(50));
 
-using (var context = new AppDbContext(optionsBuilder.Options, enableLogging: true))
+using (var context = new AppDbContext(enableLogging: true))
 {
     var sw = Stopwatch.StartNew();
     int queryCount = 0;
@@ -83,7 +77,7 @@ Console.WriteLine("\n" + "=".Repeat(50) + "\n");
 Console.WriteLine("2️⃣  VERSIONE BUONA (Include - Eager Loading)");
 Console.WriteLine("=".Repeat(50));
 
-using (var context = new AppDbContext(optionsBuilder.Options, enableLogging: true))
+using (var context = new AppDbContext(enableLogging: true))
 {
     var sw = Stopwatch.StartNew();
 
@@ -111,7 +105,7 @@ Console.WriteLine("\n" + "=".Repeat(50) + "\n");
 Console.WriteLine("3️⃣  VERSIONE OTTIMIZZATA (Select + AsNoTracking)");
 Console.WriteLine("=".Repeat(50));
 
-using (var context = new AppDbContext(optionsBuilder.Options, enableLogging: true))
+using (var context = new AppDbContext(enableLogging: true))
 {
     var sw = Stopwatch.StartNew();
 
@@ -146,7 +140,7 @@ Console.WriteLine("\n" + "=".Repeat(50) + "\n");
 Console.WriteLine("4️⃣  PAGINAZIONE CON INCLUDE");
 Console.WriteLine("=".Repeat(50));
 
-using (var context = new AppDbContext(optionsBuilder.Options))
+using (var context = new AppDbContext())
 {
     int pageSize = 10;
     int pageNumber = 1;

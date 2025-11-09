@@ -22,5 +22,3 @@
 *.md
 *.pptx
 
-# Migrations
-**/Migrations/

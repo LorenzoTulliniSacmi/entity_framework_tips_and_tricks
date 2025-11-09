@@ -3,27 +3,28 @@ using Microsoft.EntityFrameworkCore;
 
 Console.WriteLine("=== EXERCISE 02 - CODE FIRST ===\n");
 
-// Configurazione DbContext
-var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+// Comandi utili:
+// - Creare una migration: dotnet ef migrations add NomeMigration
+// - Applicare le migration: dotnet ef database update (verranno applicate in automatico)
+// - Rimuovere l'ultimo migration: dotnet ef migrations remove
+// - Generare lo script .sql di migrazione: dotnet ef migrations script -o migration.sql
 
-// Configurazione PostgreSQL (richiede Docker - vedi README)
-optionsBuilder.UseNpgsql("Host=localhost;Database=ef_lab_codefirst;Username=efuser;Password=efpass");
+// Configurazione DbContext (gestita in AppDbContext.OnConfiguring)
+using var context = new AppDbContext();
 
-// Alternativa SQLite (se non hai Docker, commenta PostgreSQL e decommenta questa riga)
-// optionsBuilder.UseSqlite("Data Source=catalog.db");
-
-using var context = new AppDbContext(optionsBuilder.Options);
+// Applica automaticamente le migrations al database
+context.Database.Migrate();
+Console.WriteLine("✓ Database aggiornato con migrations");
 
 // Verifica connessione
 if (context.Database.CanConnect())
 {
-    Console.WriteLine("✓ Database creato: OK");
-    Console.WriteLine("✓ Tabelle Categories e Products create correttamente.");
-    Console.WriteLine("\nPer applicare le migration, esegui:");
-    Console.WriteLine("  dotnet ef migrations add InitialCreate");
-    Console.WriteLine("  dotnet ef database update");
+   Console.WriteLine("✓ Tabelle Categories e Products create correttamente.");
+   Console.WriteLine("\nNota: Le migrations vengono applicate automaticamente all'avvio.");
+   Console.WriteLine("Per creare nuove migration, esegui:");
+   Console.WriteLine("  dotnet ef migrations add NomeMigration");
 }
 else
 {
-    Console.WriteLine("✗ Errore nella connessione al database");
+   Console.WriteLine("✗ Errore nella connessione al database");
 }

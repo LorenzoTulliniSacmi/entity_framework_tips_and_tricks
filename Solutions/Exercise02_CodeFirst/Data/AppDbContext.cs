@@ -8,8 +8,24 @@ public class AppDbContext : DbContext
     public DbSet<Category> Categories { get; set; }
     public DbSet<Product> Products { get; set; }
 
+    // Costruttore parameterless per EF Core tools (migrations)
+    public AppDbContext()
+    {
+    }
+
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
+    }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        // Configurazione per design-time (migrations)
+        if (!optionsBuilder.IsConfigured)
+        {
+            optionsBuilder.UseNpgsql("Host=localhost;Database=ef_lab_codefirst;Username=efuser;Password=efpass");
+            // Alternativa SQLite:
+            //optionsBuilder.UseSqlite("Data Source=catalog.db");
+        }
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

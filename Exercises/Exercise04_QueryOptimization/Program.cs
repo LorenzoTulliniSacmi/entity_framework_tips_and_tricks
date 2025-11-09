@@ -1,9 +1,12 @@
-﻿using Exercise04_QueryOptimization.Data;
+using Exercise04_QueryOptimization.Data;
 using Exercise04_QueryOptimization.Models;
 using Exercise04_QueryOptimization.Helpers;
 using Microsoft.EntityFrameworkCore;
 
-// TODO: Configurare il DbContext con SQLite e abilitare il logging
+// TODO: Creare istanze del DbContext
+// Esempio: using var context = new AppDbContext();
+// Per abilitare il logging: new AppDbContext(enableLogging: true)
+// La configurazione del database è in AppDbContext.OnConfiguring
 
 // TODO: Popolare il database con dati di test
 

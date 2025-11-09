@@ -4,17 +4,10 @@ using Microsoft.EntityFrameworkCore;
 
 Console.WriteLine("=== OPERAZIONI CRUD - ENTITY FRAMEWORK ===\n");
 
-// Configurazione DbContext
-var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
-
-// Configurazione PostgreSQL (richiede Docker - vedi README)
-optionsBuilder.UseNpgsql("Host=localhost;Database=ef_lab_crud;Username=efuser;Password=efpass");
-
-// Alternativa SQLite (se non hai Docker, commenta PostgreSQL e decommenta questa riga)
-// optionsBuilder.UseSqlite("Data Source=crud_demo.db");
-
-using var context = new AppDbContext(optionsBuilder.Options);
-context.Database.EnsureCreated();
+// Configurazione DbContext (gestita in AppDbContext.OnConfiguring)
+using var context = new AppDbContext();
+// Applica automaticamente le migrations al database
+context.Database.Migrate();
 
 // ========== CREATE ==========
 Console.WriteLine("=== CREATE ===");

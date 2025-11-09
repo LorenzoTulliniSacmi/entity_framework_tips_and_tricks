@@ -8,11 +8,6 @@ obj/
 *.exe
 *.pdb
 
-# EF Core
-Migrations/
-*.db
-*.db-shm
-*.db-wal
 
 # Visual Studio
 .vs/

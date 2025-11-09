@@ -11,6 +11,17 @@ public class AppDbContext : DbContext
 
     private readonly bool _enableLogging;
 
+    // Costruttore parameterless per EF Core tools (migrations)
+    public AppDbContext()
+    {
+    }
+
+    // Costruttore con solo enableLogging
+    public AppDbContext(bool enableLogging)
+    {
+        _enableLogging = enableLogging;
+    }
+
     public AppDbContext(DbContextOptions<AppDbContext> options, bool enableLogging = false) : base(options)
     {
         _enableLogging = enableLogging;
@@ -18,6 +29,13 @@ public class AppDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
+        // Configurazione per design-time (migrations)
+        if (!optionsBuilder.IsConfigured)
+        {
+            optionsBuilder.UseNpgsql("Host=localhost;Database=ef_lab_optimization;Username=efuser;Password=efpass");
+            // Alternativa SQLite: optionsBuilder.UseSqlite("Data Source=optimization.db");
+        }
+
         if (_enableLogging)
         {
             optionsBuilder.LogTo(Console.WriteLine, LogLevel.Information);

@@ -11,9 +11,9 @@ optionsBuilder.UseNpgsql("Host=localhost;Database=ef_lab_setup;Username=efuser;P
 
 using var context = new AppDbContext(optionsBuilder.Options);
 
-// Crea il database
-context.Database.EnsureCreated();
-Console.WriteLine("Database creato con successo!");
+// Applica automaticamente le migrations al database
+context.Database.Migrate();
+Console.WriteLine("Database aggiornato con migrations!");
 
 // Testa la connessione
 bool canConnect = context.Database.CanConnect();
