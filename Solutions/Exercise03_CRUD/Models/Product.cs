@@ -9,5 +9,7 @@ public class Product
     public int Stock { get; set; }
     public DateTime CreatedAt { get; set; }
     public int CategoryId { get; set; }
-    public Category Category { get; set; } = null!;
+
+    // virtual per abilitare Lazy Loading
+    public virtual Category Category { get; set; } = null!;
 }

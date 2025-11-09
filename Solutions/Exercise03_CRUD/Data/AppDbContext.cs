@@ -24,6 +24,10 @@ public class AppDbContext : DbContext
         {
             optionsBuilder.UseNpgsql("Host=localhost;Database=ef_lab_crud;Username=efuser;Password=efpass");
             // Alternativa SQLite: optionsBuilder.UseSqlite("Data Source=catalog.db");
+            // Abilita il Lazy Loading Proxies
+            optionsBuilder.UseLazyLoadingProxies();
+            // Abilita il logging delle query SQL
+            optionsBuilder.LogTo(Console.WriteLine, Microsoft.Extensions.Logging.LogLevel.Information);
         }
     }
 
