@@ -36,6 +36,10 @@ public class AppDbContext : DbContext
             // Alternativa SQLite: optionsBuilder.UseSqlite("Data Source=optimization.db");
         }
 
+        // ATTENZIONE: Lazy Loading abilitato per dimostrare il problema N+1
+        // In produzione, preferisci Eager Loading (Include) o Explicit Loading
+        optionsBuilder.UseLazyLoadingProxies();
+
         if (_enableLogging)
         {
             optionsBuilder.LogTo(Console.WriteLine, LogLevel.Information);
